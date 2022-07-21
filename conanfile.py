@@ -8,7 +8,7 @@ from conans.errors import ConanInvalidConfiguration
 
 class GTestConan(ConanFile):
     name = "gtest"
-    version = "1.8.1"
+    version = "1.11.0"
     description = "Google's C++ test framework"
     url = "http://github.com/bincrafters/conan-gtest"
     homepage = "https://github.com/google/googletest"
@@ -39,7 +39,7 @@ class GTestConan(ConanFile):
                 raise ConanInvalidConfiguration("Google Test {} does not support Visual Studio <= 12".format(self.version))
 
     def source(self):
-        sha256 = "9bf1fe5182a604b4135edc1a425ae356c9ad15e9b23f9f12a02e80184c3a249c"
+        sha256 = "b4870bf121ff7795ba20d20bcdd8627b8e088f2d1dab299a031c1034eddc93d5"
         tools.get("{0}/archive/release-{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         extracted_dir = "googletest-release-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
@@ -58,7 +58,7 @@ class GTestConan(ConanFile):
         return cmake
 
     def build(self):
-        tools.patch(base_path=self._source_subfolder, patch_file="gtest.patch")
+        #tools.patch(base_path=self._source_subfolder, patch_file="gtest.patch")
         cmake = self._configure_cmake()
         cmake.build()
 
